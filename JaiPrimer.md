@@ -589,7 +589,9 @@ Things that C/C++ should have had a long time ago:
 - No header files
 - . operator for both struct membership and pointer dereference -- no more ->
 - A defer statement, [similar to that of Go](http://blog.golang.org/defer-panic-and-recover).
-- Planned
+
+Planned
+-
 
 Here’s a short list of features that Blow has expressed interest in for Jai.
 
@@ -600,7 +602,9 @@ Here’s a short list of features that Blow has expressed interest in for Jai.
 - A better concurrency model
 - Named argument passing
 - A permissive license
-- Not Planned
+
+Not Planned
+-
 
 Jai will not have:
 
