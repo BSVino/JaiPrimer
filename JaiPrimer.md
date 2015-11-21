@@ -75,7 +75,7 @@ All of this is probably backwards from what you’re used to, but the learning c
        return x + y + z;
     };
     
-    printf("Sum: %f\n", sum(1, 2, 3));
+    print("Sum: %\n", sum(1, 2, 3));
 
 and structure declarations like this:
 
@@ -95,7 +95,7 @@ Arrays do not automatically cast to pointers as in C. Rather, they are "wide poi
     print_int_array :: (a : [] int) {
         n := a.count;
         for i : 0..n-1 {
-            printf("array[%d] = %d\n", i, a[i]);
+            print("array[%] = %\n", i, a[i]);
         }
     }
 
@@ -306,7 +306,7 @@ All information for building a program is contained within the source code of th
 
     build :: () {
         build_options.executable_name = "my_program";
-        printf("Building program '%s'\n", build_options.executable_name);
+        print("Building program '%'\n", build_options.executable_name);
         build_options.optimization_level = Optimization_Level.DEBUG;
         build_options.emit_line_directives = false;
     
@@ -402,19 +402,19 @@ Jai stores a table of all type information in the data segment of each compiled 
 
     for _type_table {
         // it is the iterator, it is the Type being examined. it_index is the iteration index, it is an integer
-        printf("%3d:\n", it_index);
-        printf("  name: %s\n", it.name);
-        printf("  type: %d\n", it.type); // type is an enum, INTEGER, FLOAT, BOOL, STRUCT, etc
+        print("%:\n", it_index);
+        print("  name: %\n", it.name);
+        print("  type: %\n", it.type); // type is an enum, INTEGER, FLOAT, BOOL, STRUCT, etc
     }
 
 Full introspection data is available for all structs, functions, and enums. For example, a procedure may look something like this:
 
-    printf("%s (", info_procedure.name);
+    print("% (", info_procedure.name);
     for info_procedure.argument_types {
         print_type(it);
-        if it_index != info_procedure.argument_types.count-1 then printf(", ");
+        if it_index != info_procedure.argument_types.count-1 then print(", ");
     }
-    printf(") ->");
+    print(") ->");
     print_type(info_procedure.return_type);
 
 The preceding code could print something like, "get_name(id : uint32) -> string". An enum can be examined like this:
@@ -427,7 +427,7 @@ The preceding code could print something like, "get_name(id : uint32) -> string"
     }
 
     for Hello.names {
-        printf("Name: %s value: %d\n", Hello.names[it_index], Hello.values[it_index]);
+        print("Name: % value: %\n", Hello.names[it_index], Hello.values[it_index]);
     }
 
 Reflection data such as this can be used to write serialization procedures, commonly used e.g. in network replication of entities and save game data. Current C/C++ methods for this involve heavy use of operator overloading and preprocessor directives.
@@ -452,7 +452,7 @@ Jai's primary polymorphism mechanism is at the function level, and is best descr
 
     x := sum(f1, i1);
 
-    printf("%f %d %f\n", f3, i3, x); // Output is "3.000000 3 2.000000"
+    print("% % %\n", f3, i3, x); // Output is "3.000000 3 2.000000"
 
 When sum() is called, the type T is determined by the T which is preceded by the \$ symbol. In this case, the \$ symbol precedes the a variable, and so the type of T is determined by the first parameter. So the first call to sum() is float + float, and the second call is int + int. In the third call, since the first parameter is float, both parameters and the return value become float. The second parameter is converted from int to float, and the variable x is deduced to be float as well.
 
@@ -462,9 +462,9 @@ Jai has a type called Any, which any other type can be implicitly casted to. Exa
 
     print_any(a: Any) {
         if a.type.type == FLOAT
-            printf("a is a float\n");
+            print("a is a float\n");
         else if a.type.type == INT
-            printf("a is an int\n");
+            print("a is an int\n");
     }
 
 **BAKING**
@@ -508,7 +508,7 @@ Member variables of a class are automatically initialized.
     }
 
     v : Vector3;
-    printf("%f %f %f\n", v.x, v.y, v.z); // Always prints "0 0 0"
+    print("% % %\n", v.x, v.y, v.z); // Always prints "0 0 0"
 
 You can replace these with default initializations:
 
@@ -519,10 +519,10 @@ You can replace these with default initializations:
     }
 
     v : Vector3;
-    printf("%f %f %f\n", v.x, v.y, v.z); // Always prints "1 4 9"
+    print("% % %\n", v.x, v.y, v.z); // Always prints "1 4 9"
 
     va : [100] Vector3;                                 // An array of 100 Vector3
-    printf("%f %f %f\n", va[50].x, va[50].y, va[50].z); // Always prints "1 4 9"
+    print("% % %\n", va[50].x, va[50].y, va[50].z); // Always prints "1 4 9"
 
 Or you can block the default initialization:
 
@@ -533,7 +533,7 @@ Or you can block the default initialization:
     }
 
     v : Vector3;
-    printf("%f %f %f\n", v.x, v.y, v.z); // Undefined behavior, could print anything
+    print("% % %\n", v.x, v.y, v.z); // Undefined behavior, could print anything
 
 You can also block default initialization at the variable declaration site:
 
@@ -544,10 +544,10 @@ You can also block default initialization at the variable declaration site:
     }
 
     v : Vector3 = ---;
-    printf("%f %f %f\n", v.x, v.y, v.z); // Undefined behavior, could print anything
+    print("% % %\n", v.x, v.y, v.z); // Undefined behavior, could print anything
 
     va : [100] Vector3 = ---;
-    printf("%f %f %f\n", va[50].x, va[50].y, va[50].z); // Undefined behavior, could print anything
+    print("% % %\n", va[50].x, va[50].y, va[50].z); // Undefined behavior, could print anything
 
 By explicitly uninitializing variables rather than explicitly initializing variables, Jai hopes to reduce cognitive load while retaining the potential for optimization.
 
