@@ -78,7 +78,7 @@ All of this is probably backwards from what you’re used to, but the learning c
 
 ```cpp
 // A function that accepts 3 floats as parameters and returns a float
-sum := (float x, float y, float z) -> float {
+sum := (x: float, y: float, z: float) -> float {
     return x + y + z;
 };
 
