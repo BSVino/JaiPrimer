@@ -515,9 +515,9 @@ Jai has a type called Any, which any other type can be implicitly casted to. Exa
 
 ```cpp
 print_any(a: Any) {
-    if a.type.type == FLOAT
+    if a.type.type == Type_Info_Tag.FLOAT
         print("a is a float\n");
-    else if a.type.type == INT
+    else if a.type.type == Type_Info_Tag.INT
         print("a is an int\n");
 }
 ```
