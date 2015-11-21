@@ -389,7 +389,7 @@ struct Entity {
     Vector3 positions[1024];
     Quaternion orientations[1024];
     // ... many other members here
-}
+};
 
 Entity all_entities; // A structure of arrays
 
