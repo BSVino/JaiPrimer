@@ -161,7 +161,7 @@ This is a big bucket of problems with it. For example, notice how SRGB_TABLE_SIZ
 In Jai, the same task looks like this:
 
 ```cpp
-generate_linear_srgb := () -> float[] {
+generate_linear_srgb := () -> [] float {
      srgb_table: float[SRGB_TABLE_SIZE];
      for srgb_table {
          << it = real_linear_to_srgb(cast(float)it_index / SRGB_TABLE_SIZE)
@@ -169,7 +169,7 @@ generate_linear_srgb := () -> float[] {
      return srgb_table;
 }
 
-srgb_table: float[] = #run generate_linear_srgb(); // #run invokes the compile time execution
+srgb_table: [] float = #run generate_linear_srgb(); // #run invokes the compile time execution
 
 real_linear_to_srgb := (f: float) -> float {
     table_index := cast(int)(f * SRGB_TABLE_SIZE);
