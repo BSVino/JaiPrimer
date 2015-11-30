@@ -711,7 +711,7 @@ These are a few features that Blow has proposed but not yet implemented. To my k
 The first is joint allocations:
 
 ```cpp
-Mesh := struct {
+Mesh :: struct {
     name: string;
     filename: string;
     flags: uint;
@@ -745,7 +745,7 @@ The idea here is to prevent one of the most common causes of crashes, null point
 Lastly, automatic versioning:
 
 ```cpp
-Entity_Substance := struct { @version 37
+Entity_Substance :: struct { @version 37
     flags: int;
     scale_color: Vector4;   @15
     spike_flags: int;       @[10, 36]
