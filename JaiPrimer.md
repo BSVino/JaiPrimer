@@ -643,7 +643,7 @@ test_d :: () { /* ... */ }
 test_e :: () { /* ... */ }
 
 #inline test_d    // Directive to always inline test_d
-#no_inline test_e // Directive to never inline test_d
+#no_inline test_e // Directive to never inline test_e
 ```
 
 
