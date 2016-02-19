@@ -442,6 +442,7 @@ for k : 0..all_entities.count-1
 
 Now the only thing that needs to be changed to convert between SoA and AoS is to insert or remove the SOA keyword at the struct definition site, and Jai will work behind the scenes to make everything else work as expected.
 Reflection and Run-Time Type Information
+-
 
 Jai stores a table of all type information in the data segment of each compiled program. It can be examined like this:
 
