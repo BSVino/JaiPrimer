@@ -508,7 +508,7 @@ x := sum(f1, i1);
 print("% % %\n", f3, i3, x); // Output is "3.000000 3 2.000000"
 ```
 
-When sum() is called, the type T is determined by the T which is preceded by the \$ symbol. In this case, the \$ symbol precedes the a variable, and so the type of T is determined by the first parameter. So the first call to sum() is float + float, and the second call is int + int. In the third call, since the first parameter is float, both parameters and the return value become float. The second parameter is converted from int to float, and the variable x is deduced to be float as well.
+When sum() is called, the type T is determined by the T which is preceded by the $ symbol. In this case, the $ symbol precedes the a variable, and so the type of T is determined by the first parameter. So the first call to sum() is float + float, and the second call is int + int. In the third call, since the first parameter is float, both parameters and the return value become float. The second parameter is converted from int to float, and the variable x is deduced to be float as well.
 
 **THE ANY TYPE**
 
