@@ -684,7 +684,7 @@ Jai will not have:
 - Templates or Template Meta-Programming
 - RAII
 - Constructors and Destructors
-- Polymorphism
+- Subtype polymorphism
 - Exceptions
 - References
 - A virtual machine (at least, not usually - see below)
