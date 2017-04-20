@@ -3,7 +3,7 @@ Introduction
 
 Jai is a high-level programming language developed by [Jonathan Blow](https://twitter.com/Jonathan_Blow), creator of indie games _Braid_ and, most recently, _The Witness_. It is an imperative static/strongly typed C-style language, but with a variety of modern language features that C lacks. Blow began work on Jai in late September 2014. It is still in development and as of yet is unavailable to the general public. Blow developed it with an eye towards video games, but in fact it’s a general purpose programming language that could be used for any task.
 
-**Disclaimer:** I have no association with Jon Blow. As of this writing there are no public compilers for Jai, so all information in this text is collated from [Jon Blow’s YouTube videos](https://www.youtube.com/playlist?list=PLmV5I2fxaiCKfxMBrNsU1kgKJXD3PkyxO). Therefore nothing in this post is official. There may be information more up to date than what is available on this page. That said, I believe everything in this post to be up to date as of this writing. (If you are Jon Blow and want me to correct anything in this post, [I would be happy to.](http://twitter.com/VinoBS))
+**Disclaimer:** I have no association with Jon Blow. As of this writing there are no public compilers for Jai, so all information in this text is collated from [Jon Blow’s YouTube videos](https://www.youtube.com/playlist?list=PLmV5I2fxaiCKfxMBrNsU1kgKJXD3PkyxO). Therefore nothing in this post is official. There may be information more up to date than what is available on this page. That said, I believe everything in this post to be up to date as of this writing. (If you are Jon Blow and want me to correct anything in this post, [I would be happy to](http://twitter.com/VinoBS)).
 
 Everything in this document, unless otherwise noted, is implemented and currently working in Blow’s private prototype, but as it is not yet released, everything is subject to change.
 
@@ -12,14 +12,14 @@ Brief Description
 
 In short, Jai could be described as a modern replacement for C. Some of the coolest features:
 
-- _Arbitrary compile-time code execution_ – Any function of the program can be made to run at compile time with #run.
-- _Syntax-facilitated code refactoring_ – The language syntax facilitates code reuse by making it easy to move code from local block → local function → global function.
-- _Integrated build process_ – The build process and parameters are specified by the source code itself, for consistency.
-- _Data-oriented structures_ – Automatic conversion between Structure of Arrays and Array of Structures, avoids classes and inheritance.
-- _Reflection and run-time type information_ – Static type information for every structure available at runtime.
-- _A new approach to polymorphic procedures_ – Polymorphism at the function level, with programmer control by special procedures.
-- _Low-level memory management tools_ – Better control over how libraries allocate memory, automatic ownership management, no garbage collection.
-- _Explicit control over optimization and performance characteristics_ – Explicit control over things like inlining, bounds checking, and initialization.
+- **Arbitrary compile-time code execution** – Any function of the program can be made to run at compile time with `#run`
+- **Syntax-facilitated code refactoring** – The language syntax facilitates code reuse by making it easy to move code from local block → local function → global function
+- **Integrated build process** – The build process and parameters are specified by the source code itself, for consistency
+- **Data-oriented structures** – Automatic conversion between Structure of Arrays and Array of Structures, avoids classes and inheritance
+- **Reflection and run-time type information** – Static type information for every structure available at runtime
+- **A new approach to polymorphic procedures** – Polymorphism at the function level, with programmer control by special procedures
+- **Low-level memory management tools** – Better control over how libraries allocate memory, automatic ownership management, no garbage collection
+- **Explicit control over optimization and performance characteristics** – Explicit control over things like inlining, bounds checking, and initialization
 
 The Philosophy of Jai
 =====================
@@ -184,14 +184,14 @@ The compile-time function execution has very few limitations; in fact, you can r
 
 Here are some examples of things that a compile-time function could do:
 
-- Compile-time asserts.
-- Run test cases.
-- Do code style checks.
-- Dynamically generate code and insert it to be compiled.
-- Insert build time data.
-- Download the OpenGL spec and build the most recent gl.h header file.
-- Contact a build server and retrieve/send build data.
-- Talk to your Mars probe on Mars and wait for the packets to come back and get a photo of what Mars looks like.
+- Compile-time asserts
+- Run test cases
+- Do code style checks
+- Dynamically generate code and insert it to be compiled
+- Insert build time data
+- Download the OpenGL spec and build the most recent gl.h header file
+- Contact a build server and retrieve/send build data
+- Talk to your Mars probe on Mars and wait for the packets to come back and get a photo of what Mars looks like
 
 Code Refactoring
 ----------------
@@ -509,7 +509,7 @@ x := sum(f1, i1);
 print("% % %\n", f3, i3, x); // Output is "3.000000 3 2.000000"
 ```
 
-When `sum()` is called, the type is determined by the `T` which is preceded by the `$` symbol. In this case, `$` precedes the `a` variable, and so the type `T` is determined by the first parameter. So, the first call to `sum()` is `float + float`, and the second call is `int + int`. In the third call, since the first parameter is `float`, both parameters and the return value become `float`. The second parameter is converted from `int` to `float`, and the variable `x` is deduced to be `float` as well.
+When `sum()` is called, the type is determined by the `T` which is preceded by the `$` symbol. In this case, `$` precedes the `a` variable, and so the type `T` is determined by the first parameter. So, the first call to `sum()` is float + float, and the second call is int + int. In the third call, since the first parameter is float, both parameters and the return value become float. The second parameter is converted from int to float, and the variable `x` is deduced to be float as well.
 
 **THE ANY TYPE**
 
@@ -655,44 +655,44 @@ Other Cool Stuff
 
 Things that C/C++ should have had a long time ago:
 
-- Multi-line block comments.
-- Nested block comments.
-- Specific data types for 8, 16, and 32 bit integers.
-- No implicit type conversions.
-- No header files.
-- `.` operator for both struct membership and pointer dereference access—no more `->`.
-- A `defer` statement, [similar to that of Go](http://blog.golang.org/defer-panic-and-recover).
+- Multi-line block comments
+- Nested block comments
+- Specific data types for 8, 16, and 32 bit integers
+- No implicit type conversions
+- No header files
+- `.` operator for both struct membership and pointer dereference access—no more `->`
+- A `defer` statement, [similar to that of Go](http://blog.golang.org/defer-panic-and-recover)
 
 Planned
 -------
 
 Here’s a short list of features that Blow has expressed interest in for Jai.
 
-- Automatic build management—the program specifies how to build it.
-- Captures.
-- LLVM integration.
-- Automatic versioning (see below).
-- A better concurrency model.
-- Named argument passing.
-- A permissive license.
+- Automatic build management—the program specifies how to build it
+- Captures
+- LLVM integration
+- Automatic versioning (see below)
+- A better concurrency model
+- Named argument passing
+- A permissive license
 
 Not Planned
 -----------
 
 Jai will not have:
 
-- Smart pointers.
-- Garbage collection.
-- Automatic memory management of any kind.
-- Templates or Template Meta-Programming.
-- RAII.
-- Constructors and Destructors.
-- Polymorphism.
-- Exceptions.
-- References.
-- A virtual machine (at least, not usually—see below).
-- A preprocessor (at least, not one resembling C’s—see below).
-- Header files.
+- Smart pointers
+- Garbage collection
+- Automatic memory management of any kind
+- Templates or template metaprogramming
+- RAII
+- Constructors and destructors
+- Subtype polymorphism
+- Exceptions
+- References
+- A virtual machine (at least, not usually—see below)
+- A preprocessor (at least, not one resembling C’s—see below)
+- Header files
 
 If it sounds odd to you that Jai is a modern high-level language but does not have some of the above features, then consider that Jai is not trying to be as high-level as Java or C#. It is better described as trying to be a better C. It wants to allow programmers to get as low-level as they desire. Features like garbage collection and exceptions stand as obstacles to low-level programming.
 
@@ -702,9 +702,6 @@ Further Notes
 **ADOPTION**
 
 A compelling argument for not writing an entirely new language for games is that the momentum and volume of C and C++ code in current game engines is too high, and switching to a new language is too much work for the amount of benefit. Blow argues that engines periodically rewrite their codebase anyway, and since Jai and C are so closely related, C code and Jai code can live side by side while the rewrites that would normally happen anyway take place. Since C and Jai interoperate seamlessly, Jai code can be built on top of existing C libraries. In fact, Blow uses the C interfaces to the OpenGL and [stb_image](https://github.com/nothings/stb/blob/master/stb_image.h) libraries for his Jai test code. So, replacing C and C++ can be done with no added cost to development. Meanwhile, the benefits of replacing C with a language that has all of C’s benefits but fewer drawbacks means that programmers will be happier, and thus more productive.
-
-Why not use … ?
------------------
 
 **WHY NOT USE C++/RUST/GO/D/SWIFT/HASKELL/LISP/ETC?**
 
