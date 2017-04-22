@@ -89,9 +89,9 @@ and structure declarations like this:
 
 ```cpp
 Vector3 := struct {
-    float x;
-    float y;
-    float z;
+    x: float;
+    y: float;
+    z: float;
 };
 ```
 
