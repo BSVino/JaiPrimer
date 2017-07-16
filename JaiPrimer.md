@@ -686,7 +686,6 @@ Jai will not have:
 - Automatic memory management of any kind
 - Templates or template metaprogramming
 - RAII
-- Constructors and destructors
 - Subtype polymorphism
 - Exceptions
 - References
