@@ -539,8 +539,8 @@ Marking a pointer member of a struct with `!` indicates that the object pointed 
 
 ```cpp
 node :: struct {
-    owned_a : node *! = null;
-    owned_b : node *! = null;
+    owned_a : !* node = null;
+    owned_b : !* node = null;
 }
 
 example: node = new node;
