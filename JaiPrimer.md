@@ -78,9 +78,9 @@ All of this is probably backwards from what you’re used to, but the learning c
 
 ```cpp
 // A function that accepts 3 floats as parameters and returns a float
-sum := (x: float, y: float, z: float) -> float {
+sum :: (x: float, y: float, z: float) -> float {
     return x + y + z;
-};
+}
 
 print("Sum: %\n", sum(1, 2, 3));
 ```
@@ -88,11 +88,11 @@ print("Sum: %\n", sum(1, 2, 3));
 and structure declarations like this:
 
 ```cpp
-Vector3 := struct {
+Vector3 :: struct {
     x: float;
     y: float;
     z: float;
-};
+}
 ```
 
 Arrays can be created like this:
@@ -162,7 +162,7 @@ This is a big bucket of problems with it. For example, notice how `SRGB_TABLE_SI
 In Jai, the same task looks like this:
 
 ```cpp
-generate_linear_srgb := () -> [] float {
+generate_linear_srgb :: () -> [] float {
      srgb_table: float[SRGB_TABLE_SIZE];
      for srgb_table {
          << it = real_linear_to_srgb(cast(float)it_index / SRGB_TABLE_SIZE)
@@ -172,7 +172,7 @@ generate_linear_srgb := () -> [] float {
 
 srgb_table: [] float = #run generate_linear_srgb(); // #run invokes the compile time execution
 
-real_linear_to_srgb := (f: float) -> float {
+real_linear_to_srgb :: (f: float) -> float {
     table_index := cast(int)(f * SRGB_TABLE_SIZE);
     return srgb_table[table_index];
 }
@@ -201,7 +201,7 @@ All code begins its life in some kind of code block like this before moving on t
 As an example, let’s say you’re writing some code like this:
 
 ```cpp
-draw_particles := () {
+draw_particles :: () {
     view_left: Vector3 = get_view_left();
     view_up: Vector3 = get_view_up();
 
@@ -268,7 +268,7 @@ Notice how the only change we needed to make was to add the function syntax `()`
 With parameter names we’re able to change the names of the variables inside the function’s scope to match their new function. Now we can use this function to draw any type of quad, not just particles. The capture retains `m` because it is a global object that doesn’t need to be passed as a parameter. And now we have an anonymous, locally scoped function that can be used in our draw code:
 
 ```cpp
-draw_particles := () {
+draw_particles :: () {
     view_left: Vector3 = get_view_left();
     view_up: Vector3 = get_view_up();
 
@@ -289,7 +289,7 @@ draw_particles := () {
 Anonymous functions are useful for passing as arguments to other functions, and this syntax makes them easy to create and manipulate. The next step is to give our function a name:
 
 ```cpp
-draw_quad := (origin: Vector3, left: Vector3, up: Vector3) [m] {
+draw_quad :: (origin: Vector3, left: Vector3, up: Vector3) [m] {
     m.Position3fv(origin - left - up);
     m.Position3fv(origin + left - up);
     m.Position3fv(origin + left + up);
@@ -302,14 +302,14 @@ draw_quad(origin, particle_left, particle_up);
 Now we could call it multiple times in the local scope, if we like. But we want to access our quad drawing function from the global scope. Moving the function out of the local scope requires zero changes to the function’s code:
 
 ```cpp
-draw_quad := (origin: Vector3, left: Vector3, up: Vector3) [m] {
+draw_quad :: (origin: Vector3, left: Vector3, up: Vector3) [m] {
     m.Position3fv(origin - left - up);
     m.Position3fv(origin + left - up);
     m.Position3fv(origin + left + up);
     m.Position3fv(origin - left + up);
 };
 
-draw_particles := () {
+draw_particles :: () {
     view_left: Vector3 = get_view_left();
     view_up: Vector3 = get_view_up();
 
@@ -330,8 +330,8 @@ Here is Jai’s the code maturation cycle in full:
                                  { ... } // Anonymous code block
                        [capture] { ... } // Captured code block
      (i: int) -> float [capture] { ... } // Anonymous function
-f := (i: int) -> float [capture] { ... } // Named local function
-f := (i: int) -> float [capture] { ... } // Named global function
+f :: (i: int) -> float [capture] { ... } // Named local function
+f :: (i: int) -> float [capture] { ... } // Named global function
 ```
 
 Integrated Build Process
@@ -492,7 +492,7 @@ Polymorphic Procedures
 Jai’s primary polymorphism mechanism is at the function level, and is best described with an example.
 
 ```cpp
-sum(a: $T, b: T) -> T {
+sum :: (a: $T, b: T) -> T {
     return a + b;
 }
 
@@ -516,7 +516,7 @@ When `sum()` is called, the type is determined by the `T` which is preceded by t
 Jai has a type called `Any`, which any other type can be implicitly casted to. Example:
 
 ```cpp
-print_any(a: Any) {
+print_any :: (a: Any) {
     if a.type.type == Type_Info_Tag.FLOAT
         print("a is a float\n");
     else if a.type.type == Type_Info_Tag.INT
@@ -538,10 +538,10 @@ Jai does not and will never feature garbage collection or any kind of automatic 
 Marking a pointer member of a struct with `!` indicates that the object pointed to is owned by the struct and should be deleted when the struct is deallocated. Example:
 
 ```cpp
-node := struct {
+node :: struct {
     owned_a : node *! = null;
     owned_b : node *! = null;
-};
+}
 
 example: node = new node;
 example.owned_a = new node;
@@ -722,7 +722,7 @@ Mesh :: struct {
     positions: [] Vector3;
     indices: [] int;        @joint positions
     uvs: [] Vector2;        @joint positions
-};
+}
 
 example_mesh: Mesh;
 example_mesh.positions.reserve(positions: num_positions,
@@ -735,12 +735,12 @@ Here we want to avoid multiple memory allocations, so we have the compiler do a 
 Next is optional types:
 
 ```cpp
-do_something := (a: Entity?) {
+do_something :: (a: Entity?) {
     a.x = 0; // ERROR!
     if (a) {
         a.x = 0; // OK
     }
-};
+}
 ```
 
 The idea here is to prevent one of the most common causes of crashes, null pointer dereferencing. The ? in the above code means that we don’t know whether or not the pointer is null. Trying to dereference the variable without testing to see if it is null would result in a compile time error.
@@ -752,7 +752,7 @@ Entity_Substance :: struct { @version 37
     flags: int;
     scale_color: Vector4;   @15
     spike_flags: int;       @[10, 36]
-};
+}
 ```
 
 Here Blow is providing markup for his data structures that indicates to the compiler what version of the struct each member was present in. These versioning schemes would be used as part of an automatic serialization/introspection interface, but he’s not gone into details on that other than that the language should have some capability of introspection.
