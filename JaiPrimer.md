@@ -711,7 +711,7 @@ Proposed Features
 
 These are a few features that Blow has proposed but not yet implemented. To my knowledge they’re not yet in the language. Syntax is preliminary and likely to change.
 
-The first is joint allocations:
+- Joint Allocations:
 
 ```cpp
 Mesh :: struct {
@@ -732,7 +732,7 @@ example_mesh.positions.reserve(positions: num_positions,
 
 Here we want to avoid multiple memory allocations, so we have the compiler do a joint allocation between positions, indices, and uvs, and divide the memory up accordingly. Currently this is done manually in C, and is prone to errors.
 
-Next is optional types:
+- Optional Types:
 
 ```cpp
 do_something :: (a: Entity?) {
@@ -745,7 +745,7 @@ do_something :: (a: Entity?) {
 
 The idea here is to prevent one of the most common causes of crashes, null pointer dereferencing. The ? in the above code means that we don’t know whether or not the pointer is null. Trying to dereference the variable without testing to see if it is null would result in a compile time error.
 
-Lastly, automatic versioning:
+- Automatic Versioning:
 
 ```cpp
 Entity_Substance :: struct { @version 37
@@ -755,4 +755,4 @@ Entity_Substance :: struct { @version 37
 }
 ```
 
-Here Blow is providing markup for his data structures that indicates to the compiler what version of the struct each member was present in. These versioning schemes would be used as part of an automatic serialization/introspection interface, but he’s not gone into details on that other than that the language should have some capability of introspection.
+Here we are providing markup for our data structures that indicates to the compiler what version of the struct each member was present in. These versioning schemes would be used as part of an automatic serialization/introspection interface, but there are no details on that, other than that the language should have some capability of introspection.
