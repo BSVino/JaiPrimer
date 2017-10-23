@@ -3,9 +3,9 @@ Introduction
 
 Jai is a high-level programming language developed by [Jonathan Blow](https://twitter.com/Jonathan_Blow), creator of indie games _Braid_ and, most recently, _The Witness_. It is an imperative static/strongly typed C-style language, but with a variety of modern language features that C lacks. Blow began work on Jai in late September 2014. It is still in development and as of yet is unavailable to the general public. Blow developed it with an eye towards video games, but in fact it’s a general purpose programming language that could be used for any task.
 
-**Disclaimer:** I have no association with Jon Blow. As of this writing there are no public compilers for Jai, so all information in this text is collated from [Jon Blow’s YouTube videos](https://www.youtube.com/playlist?list=PLmV5I2fxaiCKfxMBrNsU1kgKJXD3PkyxO). Therefore nothing in this post is official. There may be information more up to date than what is available on this page. That said, I believe everything in this post to be up to date as of this writing. (If you are Jon Blow and want me to correct anything in this post, [I would be happy to](http://twitter.com/VinoBS)).
+**Disclaimer:** I have no association with Jon Blow. As of this writing there are no public compilers for Jai, so all information in this text is collated from his [YouTube videos](https://www.youtube.com/playlist?list=PLmV5I2fxaiCKfxMBrNsU1kgKJXD3PkyxO). Therefore nothing in this post is official. There may be information more up to date than what is available on this page. That said, I believe everything in this post to be up to date as of this writing. (If you are Jon Blow and want me to correct anything in this post, [I would be happy to](http://twitter.com/VinoBS)).
 
-Everything in this document, unless otherwise noted, is implemented and currently working in Blow’s private prototype, but as it is not yet released, everything is subject to change.
+Everything in this document, unless otherwise noted, is implemented and currently working in the (currently private) prototype. As it is not yet released, everything in this document is subject to change.
 
 Brief Description
 -----------------
@@ -26,19 +26,26 @@ The Philosophy of Jai
 
 **THE JOY OF PROGRAMMING**
 
-At some point after programming for many years, the line between “exciting programming adventure” and “please not another code refactoring” can start to disappear. Having to update the function declaration in the header when you change its signature gets old fast. When C was originally written in 1973, there was a good reason for all that header stuff, but today there isn’t. Quality of life improvements afforded by the language can have quantifiable benefits to the productivity of the programmer using the language. (If you aren’t convinced of that, try programming anything in [Brainfuck](http://en.wikipedia.org/wiki/Brainfuck).) Compiling should be fast if not instantaneous, refactoring code should require a minimum of changes, and error messages should be helpful and pleasant. Blow believes that an improvement of the tools that programmers use can produce more than a 20% increase in productivity, and this was a primary motivation in creating a new language.
+At some point after programming for many years, the line between “exciting programming adventure” and “please not another code refactoring” can start to disappear. Having to update the function declaration in the header when you change its signature gets old fast. When C was originally written in 1973, there was a good reason for all that header stuff, but today there isn’t.
+
+Quality of life improvements afforded by the language can have quantifiable benefits to the productivity of the programmer using the language. (If you aren’t convinced of that, try programming anything in [Brainfuck](http://en.wikipedia.org/wiki/Brainfuck).) Compiling should be fast if not instantaneous, refactoring code should require a minimum of changes, and error messages should be helpful and pleasant. The belief is that an improvement of the tools that programmers use can produce more than a 20% increase in productivity, and this was a primary motivation in creating a new language.
 
 **MACHINES THAT FILL MEMORY**
 
-Video games are, as Blow puts it, machines that fill memory. The majority of the time, game programmers are thinking about how to fill memory with huge reams of data in ways that allow the data to be efficiently accessed and processed. Hundreds of megabytes of memory must be moved from the hard disk into main memory, and from there into the video card or the processor cache to be processed and returned back to main memory. Because video game players don’t like to wait, all this must be done as fast as is allowable by laws of our universe. The primary purpose of a programming language is to allow the specification of algorithms to manage data. Language features like garbage collection and templated data streams and dynamic string classes may help the programmer write code faster, but they don’t help the programmer write faster code.
+The original designer said that "video games are machines that fill memory". The majority of the time, game programmers are thinking about how to fill memory with huge reams of data in ways that allow the data to be efficiently accessed and processed. Hundreds of megabytes of memory must be moved from the hard disk into main memory, and from there into the video card or the processor cache to be processed and returned back to main memory. Because video game players don’t like to wait, all this must be done as fast as is allowable by laws of our universe. The primary purpose of a programming language is to allow the specification of algorithms to manage data. Language features like garbage collection and templated data streams and dynamic string classes may help the programmer write code faster, but they don’t help the programmer write faster code.
 
 **FRICTION REDUCTION**
 
-Another major design goal of Jai is to reduce what Blow calls friction in programming. Friction happens when the syntax of a language interferes with the programmer’s workflow. When Java requires that all objects be classes, forcing programmers to put the global variables they need into global classes, that’s friction. When Haskell requires that all procedures be functions and have no side effects, that’s friction. When C++’s lambda function syntax is different from its class method syntax is different from its global function syntax, that’s friction. Java, Haskell and C++ are examples of what Blow calls “big agenda” languages, where the idealism (and in C++’s case, lack of a consistent vision) of the language gets in the programmer’s way. Blow has a low tolerance for friction in his language, especially when the friction is unnecessary.
+Another major design goal of Jai is to reduce friction when programming. Friction happens when the syntax of a language interferes with the programmer’s workflow. For example:
+- Java requires that all objects be classes, forcing programmers to put the global variables they need into global classes.
+- Haskell requires that all procedures be functions and have no side effects.
+- C++’s lambda function syntax is different from its class method syntax, which is itself different from its global function syntax.
+
+Java, Haskell and C++ are examples of what could be called “big agenda” languages, where the languages' idealism (and in C++’s case, its lack of a consistent vision) gets in the programmer’s way. Jai is being designed with a low tolerance for friction, especially when it is unnecessary.
 
 **DESIGN FOR GOOD PROGRAMMERS**
 
-Blow wants a language that is designed for good programmers, not against bad programmers. Languages like Java were marketed as idiot-proof, in that it’s much more difficult for programmers to write code that can hurt them. The Jai philosophy is, if you don’t want idiots writing bad code for your project, then don’t hire any idiots. Jai allows programmers direct access to the sharp tools that can get the job done. Game programmers are not afraid of pointers and manual memory management. Programmers do make mistakes and cause crashes, perhaps even serious ones, but Blow argues that the increase in productivity and reduction of friction when memory-safe mechanisms are absent more than make up for the time lost in tracking down errors, especially when good programmers tend to produce relatively few errors.
+Jai is a language designed for good programmers, not against bad programmers. Languages like Java were marketed as idiot-proof, in that it’s much more difficult for programmers to write code that can hurt them. The Jai philosophy is, if you don’t want idiots writing bad code for your project, then don’t hire any idiots. Jai allows programmers direct access to the sharp tools that can get the job done. Game programmers are not afraid of pointers and manual memory management. Programmers do make mistakes and cause crashes, perhaps even serious ones, but the argument is that the increase in productivity and reduction of friction when memory-safe mechanisms are absent more than make up for the time lost in tracking down errors, especially when good programmers tend to produce relatively few errors.
 
 **PERFORMANCE AND DATA-ORIENTED PROGRAMMING**
 
@@ -180,7 +187,7 @@ real_linear_to_srgb :: (f: float) -> float {
 
 The `#run` directive instructs Jai to run the function `generate_linear_srgb()` at compile time. Jai’s compile time function execution runs the command at compile time and returns a table of values, which is then compiled directly into the binary as `srgb_table`. When the program is run, the `generate_linear_srgb()` function no longer exists. Only the table it generated exists, which is used by `linear_to_srgb()`.
 
-The compile-time function execution has very few limitations; in fact, you can run arbitrary code in your code base as part of the compiler. In Blow’s first demonstration he shows how to run [an entire game as part of the compiler](http://youtu.be/UTqZNujQOlA?t=43m57s), and bake the data from the game into the program binary. (I hope `#run invaders();` is shipped with the language.) The compiler builds the compile-time executed functions to a special bytecode language and runs them in an interpreter, and the results are funneled back into the source code. The compiler then continues as normal.
+The compile-time function execution has very few limitations; in fact, you can run arbitrary code in your code base as part of the compiler. The first demonstration of Jai shows how to run [an entire game as part of the compiler](http://youtu.be/UTqZNujQOlA?t=43m57s), and bake the data from the game into the program binary. (I hope `#run invaders();` is shipped with the language.) The compiler builds the compile-time executed functions to a special bytecode language and runs them in an interpreter, and the results are funneled back into the source code. The compiler then continues as normal.
 
 Here are some examples of things that a compile-time function could do:
 
@@ -234,7 +241,7 @@ origin := it.origin;
 }
 ```
 
-(_Disclaimer:_ This step hasn’t been implemented by Blow yet. It’s one of his planned features.) The `[m, origin, particle_left, particle_up]` notation is a capture that prevents any object not in the capture from being accessed inside the inner scope of the new bracket. Notice that we had to change `it.origin` to `origin` and add `origin` to the capture list—`it` is not captured and is unavailable inside the inner scope.
+(_Disclaimer:_ This step hasn’t been implemented yet. It’s one of the planned features.) The `[m, origin, particle_left, particle_up]` notation is a capture that prevents any object not in the capture from being accessed inside the inner scope of the new bracket. Notice that we had to change `it.origin` to `origin` and add `origin` to the capture list—`it` is not captured and is unavailable inside the inner scope.
 
 Captures help in refactoring code as we’re seeing here but they can also help in other ways. For example, when programmers are moving code from being singlethreaded to multithreaded, captures could enforce that only thread-local data is accessed. Captures are an insurance policy that the code inside the capture only reads or writes the state specified in the capture.
 
@@ -551,7 +558,7 @@ example.owned_b = new node;
 delete example; // owned_a and owned_b are also deleted.
 ```
 
-Here, `owned_a` and `owned_b` are marked as being owned by `node`, and will be automatically deleted when the node is deleted. In C++ this is accomplished through a `unique_ptr<T>`, but Blow thinks that this is the wrong way to do it because the template approach now masks the true type of the object. A `unique_ptr<node>` is no longer a `node`—it’s a `unique_ptr` masquerading as a `node`. It’s preferable to retain the type of `node*`, and retain the properties of `node*`-ness that go along with it, because we don’t really actually care about `unique_ptr` for its own sake.
+Here, `owned_a` and `owned_b` are marked as being owned by `node`, and will be automatically deleted when the node is deleted. In C++ this is accomplished through a `unique_ptr<T>`, but Jai considers this the wrong way to do it, because the template approach now masks the true type of the object. A `unique_ptr<node>` is no longer a `node`—it’s a `unique_ptr` masquerading as a `node`. It’s preferable to retain the type of `node*`, and retain the properties of `node*`-ness that go along with it, because we don’t really actually care about `unique_ptr` for its own sake.
 
 **LIBRARY ALLOCATORS**
 
@@ -667,7 +674,7 @@ Things that C/C++ should have had a long time ago:
 Planned
 -------
 
-Here’s a short list of features that Blow has expressed interest in for Jai.
+Here’s a short list of planned features to be added to Jai.
 
 - Automatic build management—the program specifies how to build it
 - Captures
@@ -705,12 +712,14 @@ A compelling argument for not writing an entirely new language for games is that
 
 **WHY NOT USE C++/RUST/GO/D/SWIFT/HASKELL/LISP/ETC?**
 
-Those are strong languages, but none of them contain the right combination of features (or lack of features) that game programmers need. Automatic memory management is a non-starter for game programmers who need direct control over their memory layouts. Any interpreted language will be too slow. Functional-only languages are pointlessly restricting. Object-oriented-only languages are overly complex. Blow preferred to develop a new language with the qualities that game programmers need, and without the qualities they don’t.
+Those are strong languages, but none of them contain the right combination of features (or lack of features) that game programmers need. Automatic memory management is a non-starter for game programmers who need direct control over their memory layouts. Any interpreted language will be too slow. Functional-only languages are pointlessly restricting. Object-oriented-only languages are overly complex.
+
+The idea behind Jai is to develop a new language with the qualities that game programmers need, and without the qualities they don’t.
 
 Proposed Features
 -----------------
 
-These are a few features that Blow has proposed but not yet implemented. To my knowledge they’re not yet in the language. Syntax is preliminary and likely to change.
+These are a few proposed features that have not been implemented yet. To my knowledge they’re not yet in the language. Syntax is preliminary and likely to change.
 
 - Joint Allocations:
 
