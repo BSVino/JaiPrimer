@@ -324,7 +324,7 @@ draw_particles :: () {
 
 The strength of Jai’s function syntax is that it doesn’t change whether the function is an anonymous function, a local function (i.e. lives inside the scope of another function) a member function of a class or a global function. This is in contrast to in C++, where a local function is called a lambda, and has completely different syntax than a member function, which must have a class name and `::` etc, which is slightly different syntax than a global function which has no class name or `::`. The result is that as code matures and moves from a local context to a global context, the work of refactoring can be done with minimal edits.
 
-Here is Jai’s the code maturation cycle in full:
+Here is Jai’s code maturation process in full:
 
 ```cpp
                                  { ... } // Anonymous code block
@@ -348,7 +348,8 @@ build :: () {
 
     update_build_options();
 
-    // Jai will automatically build any files included with the #load directive, but other files can also be manually added
+    // Jai will automatically build any files included with the #load directive,
+    // but other files can also be manually added.
     add_build_file("misc.jai");
     add_build_file("checks.jai");
 }
