@@ -29,9 +29,11 @@ SoA pointers are also bound checked as they're 'fat pointers' aka arrays.
 
 
 * Here strings:
+```
 # string <end keyword>
 ...
 <end keyword>
+```
 Currently no indentation support and the <end keyword> must be at the beginning of the line.
 Strings are Unicode strings. Can be empty.
 
