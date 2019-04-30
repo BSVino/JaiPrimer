@@ -456,7 +456,7 @@ Jai stores a table of all type information in the data segment of each compiled 
 
 ```cpp
 for _type_table {
-    // it is the iterator, it is the Type being examined. it_index is the iteration index, it is an integer
+    // "it" is the iterator and is the Type being examined. "it_index" is the iteration index and is an integer
     print("%:\n", it_index);
     print("  name: %\n", it.name);
     print("  type: %\n", it.type); // type is an enum, INTEGER, FLOAT, BOOL, STRUCT, etc
