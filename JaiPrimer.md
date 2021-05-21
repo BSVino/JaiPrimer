@@ -1,6 +1,8 @@
 Introduction
 ============
 
+NOTE: Jai is created by Jon Blow. I, the person who made this guide, am not Jon Blow. I did my best to capture the spirit of Jai from the first few videos Jon made about it in 2015 or so. Since then Jon has said that he doesn't think the contents of this document describe Jai well or his intentions with it. The best source of information about the language is its designer, Jon Blow.
+
 Jai is a high-level programming language developed by [Jonathan Blow](https://twitter.com/Jonathan_Blow), creator of indie games _Braid_ and, most recently, _The Witness_. It is an imperative static/strongly typed C-style language, but with a variety of modern language features that C lacks. Blow began work on Jai in late September 2014. It is still in development and as of yet is unavailable to the general public. Blow developed it with an eye towards video games, but in fact it’s a general purpose programming language that could be used for any task.
 
 **Disclaimer:** I have no association with Jon Blow. As of this writing there are no public compilers for Jai, so all information in this text is collated from his [YouTube videos](https://www.youtube.com/playlist?list=PLmV5I2fxaiCKfxMBrNsU1kgKJXD3PkyxO). Therefore nothing in this post is official. There may be information more up to date than what is available on this page. That said, I believe everything in this post to be up to date as of this writing. (If you are Jon Blow and want me to correct anything in this post, [I would be happy to](http://twitter.com/VinoBS)).
