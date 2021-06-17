@@ -1,5 +1,4 @@
-Introduction
-============
+# Introduction
 
 NOTE: Jai is created by Jon Blow. I, the person who made this guide, am not Jon Blow. I did my best to capture the spirit of Jai from the first few videos Jon made about it in 2015 or so. Since then Jon has said that he doesn't think the contents of this document describe Jai well or his intentions with it. The best source of information about the language is its designer, Jon Blow.
 
@@ -9,8 +8,7 @@ Jai is a high-level programming language developed by [Jonathan Blow](https://tw
 
 Everything in this document, unless otherwise noted, is implemented and currently working in the (currently private) prototype. As it is not yet released, everything in this document is subject to change.
 
-Brief Description
------------------
+## Brief Description
 
 In short, Jai could be described as a modern replacement for C. Some of the coolest features:
 
@@ -23,41 +21,39 @@ In short, Jai could be described as a modern replacement for C. Some of the cool
 - **Low-level memory management tools** – Better control over how libraries allocate memory, automatic ownership management, no garbage collection
 - **Explicit control over optimization and performance characteristics** – Explicit control over things like inlining, bounds checking, and initialization
 
-The Philosophy of Jai
-=====================
+# The Philosophy of Jai
 
 **THE JOY OF PROGRAMMING**
 
-At some point after programming for many years, the line between “exciting programming adventure” and “please not another code refactoring” can start to disappear. Having to update the function declaration in the header when you change its signature gets old fast. When C was originally written in 1973, there was a good reason for all that header stuff, but today there isn’t.
+At some point after programming for many years, the line between “exciting programming adventure” and “please not another code refactoring” can start to disappear. Having to update the function declaration in the header when you change its signature gets old fast. When C was originally written in 1973, there was a good reason for all that header stuff, but today it's more difficult to justify.
 
 Quality of life improvements afforded by the language can have quantifiable benefits to the productivity of the programmer using the language. (If you aren’t convinced of that, try programming anything in [Brainfuck](http://en.wikipedia.org/wiki/Brainfuck).) Compiling should be fast if not instantaneous, refactoring code should require a minimum of changes, and error messages should be helpful and pleasant. The belief is that an improvement of the tools that programmers use can produce more than a 20% increase in productivity, and this was a primary motivation in creating a new language.
 
 **MACHINES THAT FILL MEMORY**
 
-The original designer said that "video games are machines that fill memory". The majority of the time, game programmers are thinking about how to fill memory with huge reams of data in ways that allow the data to be efficiently accessed and processed. Hundreds of megabytes of memory must be moved from the hard disk into main memory, and from there into the video card or the processor cache to be processed and returned back to main memory. Because video game players don’t like to wait, all this must be done as fast as is allowable by laws of our universe. The primary purpose of a programming language is to allow the specification of algorithms to manage data. Language features like garbage collection and templated data streams and dynamic string classes may help the programmer write code faster, but they don’t help the programmer write faster code.
+The original designer said that "video games are machines that fill memory". The majority of the time, game programmers are thinking about how to fill memory with huge reams of data in ways that allow the data to be efficiently accessed and processed. Hundreds of megabytes of memory must be moved from the hard disk into main memory, and from there into the video card or the processor cache to be processed and returned back to main memory. Because video game players don’t like to wait, or can't afford to in the case of competetive multiplayer games, all this must be done as fast as is allowable by laws of our universe. The primary purpose of a programming language is to allow the specification of algorithms to manage data. Language features like garbage collection, templated data streams, and dynamic string classes may help the programmer write code faster, but they don’t help the programmer write faster code.
 
 **FRICTION REDUCTION**
 
 Another major design goal of Jai is to reduce friction when programming. Friction happens when the syntax of a language interferes with the programmer’s workflow. For example:
+
 - Java requires that all objects be classes, forcing programmers to put the global variables they need into global classes.
 - Haskell requires that all procedures be functions and have no side effects.
 - C++’s lambda function syntax is different from its class method syntax, which is itself different from its global function syntax.
 
 Java, Haskell and C++ are examples of what could be called “big agenda” languages, where the languages' idealism (and in C++’s case, its lack of a consistent vision) gets in the programmer’s way. Jai is being designed with a low tolerance for friction, especially when it is unnecessary.
 
-**DESIGN FOR GOOD PROGRAMMERS**
+**DESIGN FOR DILLIGENT PROGRAMMERS**
 
-Jai is a language designed for good programmers, not against bad programmers. Languages like Java were marketed as idiot-proof, in that it’s much more difficult for programmers to write code that can hurt them. The Jai philosophy is, if you don’t want idiots writing bad code for your project, then don’t hire any idiots. Jai allows programmers direct access to the sharp tools that can get the job done. Game programmers are not afraid of pointers and manual memory management. Programmers do make mistakes and cause crashes, perhaps even serious ones, but the argument is that the increase in productivity and reduction of friction when memory-safe mechanisms are absent more than make up for the time lost in tracking down errors, especially when good programmers tend to produce relatively few errors.
+Jai is a language designed for dilligent programmers. Languages like Java were marketed as idiot-proof, in that it’s much more difficult for programmers to write code that can hurt them. The Jai philosophy is, "If you don’t want idiots writing bad code for your project, then don’t hire any idiots". Jai allows programmers direct access to the sharp tools that will get the job done. Employing features such as pointers and manual memory management is crucial to effective game design. Programmers do make mistakes and cause crashes, perhaps even serious ones, but the argument is that the increase in productivity, and reduction of friction when memory-safe mechanisms are absent, more than make up for the time lost in tracking down errors. When programmers are dilligent, they produce relatively few errors.
 
 **PERFORMANCE AND DATA-ORIENTED PROGRAMMING**
 
-If as a programmer you care about user experience (which you should), then you should care about the performance of your program. You should reason about your code’s behavior on the range of machines that you’re shipping on, and design your data and control structures to use that hardware’s capability most efficiently. (Here I’m describing [Mike Acton’s “Data-Oriented Design” methodology](https://www.youtube.com/watch?v=rX0ItVEVjHc).) Programmers who care about the performance of their software on their target hardware are inhibited by programming languages that sit between them and the hardware. Mechanisms like virtual machines and automatic memory management interfere with the programmer’s ability to reason about the program’s performance on the target hardware. Abstractions like RAII, constructors and destructors, polymorphism, and exceptions were invented with the intention of solving problems that game programmers don’t have, and with the result of interfering with the solutions to problems that game programmers do have. Jai jettisons these abstractions so that programmers can think more about their actual problems—the data and their algorithms.
+If as a programmer you care about user experience (which you should), then you should care about the performance of your program. You should reason about your code’s behavior on the range of machines that you’re shipping on, and design your data and control structures to use that hardware’s capability most efficiently. (Here I’m describing [Mike Acton’s “Data-Oriented Design” methodology](https://www.youtube.com/watch?v=rX0ItVEVjHc).) Programmers who care about the performance of their software on their target hardware are inhibited by programming languages that sit between them and the hardware. Mechanisms like virtual machines and automatic memory management interfere with the programmer’s ability to reason about the program’s performance on the target hardware. Abstractions like RAII, constructors and destructors, polymorphism, and exceptions were invented with the intention of solving problems that game programmers don’t have, with the result of contributing to problems that game programmers do have. Jai jettisons these abstractions so that programmers can think more about their actual problems: the data and their algorithms.
 
-Jai Language Features
-=====================
+# Jai Language Features
 
-Types and Declarations
-----------------------
+## Types and Declarations
 
 The syntax `name: type = value;` specifies that a variable named `name` is of the type `type` and is to receive the value `value`. It was proposed by [Sean Barrett](https://twitter.com/nothings). Some examples:
 
@@ -124,8 +120,7 @@ print_int_array :: (a: [] int) {
 
 Retaining the array size information can help developers avoid the pattern of passing array lengths as additional parameters and assist in automatic bounds checking (see _Walter Bright – C’s Biggest Mistake_).
 
-Arbitrary Compile-Time Code Execution
--------------------------------------
+## Arbitrary Compile-Time Code Execution
 
 Suppose I want to write a function in C that converts a linear color value to [sRGB](http://en.wikipedia.org/wiki/SRGB). This involves the `pow()` function, which is on the expensive side. We can avoid `pow()` by doing the calculation ourselves instead and distributing the results as part of our program. So we write a table of values and return those.
 
@@ -142,7 +137,7 @@ float linear_to_srgb(float f)
 }
 ```
 
-(_Note:_ The above is bad code, only used for example. For better code, try [stb_image_resize’s sRGB functions](https://github.com/nothings/stb/blob/master/stb_image_resize.h).) So far so good, except how will we get the values for the srgb_table? We can write another small program that outputs values. For example:
+(_Note:_ The above code sample is for demonstration purpose, for better written code, see [stb_image_resize’s sRGB functions](https://github.com/nothings/stb/blob/master/stb_image_resize.h).) So far so good, except how will we get the values for the srgb_table? We can write another small program that outputs values. For example:
 
 ```cpp
 float real_linear_to_srgb(float f)
@@ -166,7 +161,7 @@ int main(int c, char* s) {
 
 We can compile this small program, which will output a table of sRGB values, and then we can copy the output into our actual program.
 
-This is a big bucket of problems with it. For example, notice how `SRGB_TABLE_SIZE` is defined twice, once in the actual program and once in the helper program. So we now have to maintain two separate source codes. This can get unwieldy for large programs.
+This has a big bucket of problems with it. For example, notice how `SRGB_TABLE_SIZE` is defined twice, once in the actual program and once in the helper program. So we now have to maintain two separate source codes. This can get unwieldy for large programs.
 
 In Jai, the same task looks like this:
 
@@ -202,8 +197,7 @@ Here are some examples of things that a compile-time function could do:
 - Contact a build server and retrieve/send build data
 - Talk to your Mars probe on Mars and wait for the packets to come back and get a photo of what Mars looks like
 
-Code Refactoring
-----------------
+## Code Refactoring
 
 All code begins its life in some kind of code block like this before moving on to be used in more general cases. Jai has some special syntaxes that can assist the programmer in moving code from specific cases out into general cases, to facilitate code reuse.
 
@@ -228,7 +222,7 @@ draw_particles :: () {
 }
 ```
 
-These mesh generation calls are actually a special case of some general quad rendering, so they can be factored out into another function so they can be used in other places. Jai makes this refactoring very straightforward. The first step is to enclose the code in a new scope with a special capture syntax.
+These mesh generation calls are actually a special case of some general quad rendering. They can be factored out into another function for reusability. Jai makes this refactoring very straightforward. The first step is to enclose the code in a new scope with a special capture syntax.
 
 ```cpp
 particle_left := view_left * it.particle_size;
@@ -245,10 +239,9 @@ origin := it.origin;
 
 (_Disclaimer:_ This step hasn’t been implemented yet. It’s one of the planned features.) The `[m, origin, particle_left, particle_up]` notation is a capture that prevents any object not in the capture from being accessed inside the inner scope of the new bracket. Notice that we had to change `it.origin` to `origin` and add `origin` to the capture list—`it` is not captured and is unavailable inside the inner scope.
 
-Captures help in refactoring code as we’re seeing here but they can also help in other ways. For example, when programmers are moving code from being singlethreaded to multithreaded, captures could enforce that only thread-local data is accessed. Captures are an insurance policy that the code inside the capture only reads or writes the state specified in the capture.
+Captures help in refactoring code as we’re seeing here but they can also help in other ways. For example, when programmers are moving code from being single threaded to multithreaded, captures could enforce that only thread-local data is accessed. Captures are an insurance policy that ensure the code inside only performs read/write on the specified state.
 
-Now we’ve identified all of the parts of our code that depend on external things, so we’ve improved our code’s hygiene and made it easy to pull this code out into its own function. Now we want to continue so that we can use the quad drawing code in other places. So we create a function out of this block capture:
-
+Now we’ve identified all of the parts of our code that depend on external input, so we’ve improved our code’s hygiene and facilitated exporting it into its own function. Now we want to continue so that we can use the quad drawing code in other places. So we create a function out of this block capture:
 
 ```cpp
 particle_left := view_left * it.particle_size;
@@ -263,7 +256,7 @@ origin := it.origin;
 } (); // Call the function
 ```
 
-Notice how the only change we needed to make was to add the function syntax `()`. The capture remained intact. So we went from a blocked capture to a function with very little effort. Now if we like we can move the vectors to be function parameters:
+Notice how the only change we needed to make was to add the function syntax `()`. The capture remained intact. We went from a blocked capture to a function with very little effort. Now if we like we can move the vectors to be function parameters:
 
 ```cpp
 (origin: Vector3, left: Vector3, up: Vector3) [m] {
@@ -274,7 +267,7 @@ Notice how the only change we needed to make was to add the function syntax `()`
 }
 ```
 
-With parameter names we’re able to change the names of the variables inside the function’s scope to match their new function. Now we can use this function to draw any type of quad, not just particles. The capture retains `m` because it is a global object that doesn’t need to be passed as a parameter. And now we have an anonymous, locally scoped function that can be used in our draw code:
+With parameter names we’re able to change the names of the variables inside the function scope to match their new use. We can utilize this function to draw any type of quad, not just particles. The capture retains `m` because it is a global object that doesn’t need to be passed as a parameter: yielding an anonymous, locally scoped function that can be used in our draw code:
 
 ```cpp
 draw_particles :: () {
@@ -295,7 +288,7 @@ draw_particles :: () {
 }
 ```
 
-Anonymous functions are useful for passing as arguments to other functions, and this syntax makes them easy to create and manipulate. The next step is to give our function a name:
+Anonymous functions are useful for passing as arguments to other functions. This syntax makes them easy to create and manipulate. The next step is to give our function a name:
 
 ```cpp
 draw_quad :: (origin: Vector3, left: Vector3, up: Vector3) [m] {
@@ -331,7 +324,7 @@ draw_particles :: () {
 }
 ```
 
-The strength of Jai’s function syntax is that it doesn’t change whether the function is an anonymous function, a local function (i.e. lives inside the scope of another function) a member function of a class or a global function. This is in contrast to in C++, where a local function is called a lambda, and has completely different syntax than a member function, which must have a class name and `::` etc, which is slightly different syntax than a global function which has no class name or `::`. The result is that as code matures and moves from a local context to a global context, the work of refactoring can be done with minimal edits.
+One strength of Jai’s function syntax is that it doesn’t change whether the function is anonymous, global, local (i.e. inside the scope of another function), a member function of a class.. This is in contrast to C++ wherein a local function is called a lambda and has completely different syntax than a member function; which must have a class name and `::` etc. This differs slightly from a global function, which has no class name or `::`. The result is that as code matures and moves from a local context to a global context, the work of refactoring can be done with minimal edits.
 
 Here is Jai’s code maturation process in full:
 
@@ -343,8 +336,7 @@ f :: (i: int) -> float [capture] { ... } // Named local function
 f :: (i: int) -> float [capture] { ... } // Named global function
 ```
 
-Integrated Build Process
-------------------------
+## Integrated Build Process
 
 All information for building a program is contained within the source code of the program. Thus there is no need for a `make` command or project files to build a Jai program. As a simple example:
 
@@ -366,10 +358,9 @@ build :: () {
 #run build();
 ```
 
-When the program is built, the #run directive runs build() at compile-time. Then `build()` establishes all of the build options for this project. No external build tools are required, all build scripting is done within Jai, and in the same environment of the rest of the code.
+When the program is built, the #run directive runs build() at compile-time. Then `build()` establishes all of the build options for this project. No external build tools are required, all build scripting is done within Jai in the same environment of the rest of the code.
 
-Data-Oriented Structures
-------------------------
+## Data-Oriented Structures
 
 **SOA AND AOS**
 
@@ -409,9 +400,9 @@ for (int k = 0; k < 1024; k++)
     update_orientation(&all_entities.orientations[k]);
 ```
 
-can improve performance a great deal because of fewer cache misses.
+can improve performance a great deal due to fewer cache misses.
 
-However, as programs get larger, it becomes much more difficult to reorganize the data. Testing whether a single, simple change has any effect on performance can take the developer a long time, because once the data structures must change, all of the code that acts on that data structure breaks. So Jai provides mechanisms for automatically transitioning between SoA and AoS without breaking the supporting code. For example:
+However, as programs get larger, it becomes much more difficult to reorganize the data. Testing whether a single, simple change has any effect on performance can take the developer a long time: once the data structures must change, all of the code that acts on that data structure breaks. Jai provides mechanisms for automatically transitioning between SoA and AoS without breaking the supporting code. For example:
 
 ```cpp
 Vector3 :: struct {
@@ -451,8 +442,7 @@ for k : 0..all_entities.count-1
 
 Now the only thing that needs to be changed to convert between SoA and AoS is to insert or remove the `SOA` keyword at the struct definition site, and Jai will work behind the scenes to make everything else work as expected.
 
-Reflection and Run-Time Type Information
-----------------------------------------
+## Reflection and Run-Time Type Information
 
 Jai stores a table of all type information in the data segment of each compiled program. It can be examined like this:
 
@@ -494,8 +484,7 @@ for Hello.names {
 
 Reflection data such as this can be used to write serialization procedures, commonly used e.g. in network replication of entities and save game data. Current C/C++ methods for this involve heavy use of operator overloading and preprocessor directives.
 
-Polymorphic Procedures
-----------------------
+## Polymorphic Procedures
 
 **FUNCTION POLYMORPHISM**
 
@@ -538,8 +527,7 @@ print_any :: (a: Any) {
 
 … this section is not written yet! Sorry. (The `#bake` directive emits a function with a combination of arguments baked in. For example, `#bake sum(a, 1)` becomes equivalent to `a += 1`.)
 
-Memory Management
------------------
+## Memory Management
 
 Jai does not and will never feature garbage collection or any kind of automatic memory management.
 
@@ -560,13 +548,13 @@ example.owned_b = new node;
 delete example; // owned_a and owned_b are also deleted.
 ```
 
-Here, `owned_a` and `owned_b` are marked as being owned by `node`, and will be automatically deleted when the node is deleted. In C++ this is accomplished through a `unique_ptr<T>`, but Jai considers this the wrong way to do it, because the template approach now masks the true type of the object. A `unique_ptr<node>` is no longer a `node`—it’s a `unique_ptr` masquerading as a `node`. It’s preferable to retain the type of `node*`, and retain the properties of `node*`-ness that go along with it, because we don’t really actually care about `unique_ptr` for its own sake.
+Here, `owned_a` and `owned_b` are marked as being owned by `node`, and will be automatically deleted when the node is deleted. In C++ this is accomplished through a `unique_ptr<T>`, but the template approach masks the true type of the object. A `unique_ptr<node>` is no longer a `node`—it’s a `unique_ptr` masquerading as a `node`. It’s preferable to retain the type of `node*`, and retain the properties of `node*`-ness that go along with it, because we don’t care about `unique_ptr` for its own sake.
 
 **LIBRARY ALLOCATORS**
 
 … this section is not written yet! Sorry. (Jai provides mechanisms for managing the allocations of an imported library without requiring work from the library writers.)
 
-[//]: # (Explicit Performance Control)
+[//]: # 'Explicit Performance Control'
 
 **INITIALIZATION**
 
@@ -660,21 +648,18 @@ test_e :: () { /* ... */ }
 #no_inline test_e // Directive to never inline test_e
 ```
 
-Other Cool Stuff
-----------------
+## Other Cool Stuff
 
 Things that C/C++ should have had a long time ago:
 
-- Multi-line block comments
 - Nested block comments
-- Specific data types for 8, 16, and 32 bit integers
+- Broader hardware suppport of specific data types for 8, 16, and 32 bit integers
 - No implicit type conversions
 - No header files
 - `.` operator for both struct membership and pointer dereference access—no more `->`
 - A `defer` statement, [similar to that of Go](http://blog.golang.org/defer-panic-and-recover)
 
-Planned
--------
+## Planned
 
 Here’s a short list of planned features to be added to Jai.
 
@@ -686,8 +671,7 @@ Here’s a short list of planned features to be added to Jai.
 - Named argument passing
 - A permissive license
 
-Not Planned
------------
+## Not Planned
 
 Jai will not have:
 
@@ -705,21 +689,19 @@ Jai will not have:
 
 If it sounds odd to you that Jai is a modern high-level language but does not have some of the above features, then consider that Jai is not trying to be as high-level as Java or C#. It is better described as trying to be a better C. It wants to allow programmers to get as low-level as they desire. Features like garbage collection and exceptions stand as obstacles to low-level programming.
 
-Further Notes
-=============
+# Further Notes
 
 **ADOPTION**
 
-A compelling argument for not writing an entirely new language for games is that the momentum and volume of C and C++ code in current game engines is too high, and switching to a new language is too much work for the amount of benefit. Blow argues that engines periodically rewrite their codebase anyway, and since Jai and C are so closely related, C code and Jai code can live side by side while the rewrites that would normally happen anyway take place. Since C and Jai interoperate seamlessly, Jai code can be built on top of existing C libraries. In fact, Blow uses the C interfaces to the OpenGL and [stb_image](https://github.com/nothings/stb/blob/master/stb_image.h) libraries for his Jai test code. So, replacing C and C++ can be done with no added cost to development. Meanwhile, the benefits of replacing C with a language that has all of C’s benefits but fewer drawbacks means that programmers will be happier, and thus more productive.
+A compelling argument for not writing an entirely new language for games is that the momentum and volume of C and C++ code in current game engines is too high, and switching to a new language is too much work for the amount of benefit. Blow argues that engines periodically rewrite their codebase anyway, and since Jai and C are so closely related, C code and Jai code can live side by side while the rewrites that would normally happen anyway take place. Since C and Jai interoperate seamlessly, Jai code can be built on top of existing C libraries. In fact, Blow uses the C interfaces to the OpenGL and [stb_image](https://github.com/nothings/stb/blob/master/stb_image.h) libraries for his Jai test code. So, replacing C and C++ can be done with no added cost to development. Meanwhile, the benefits of replacing C with a language that has all of C’s benefits but fewer drawbacks means that programmers will be happier and more productive.
 
 **WHY NOT USE C++/RUST/GO/D/SWIFT/HASKELL/LISP/ETC?**
 
-Those are strong languages, but none of them contain the right combination of features (or lack of features) that game programmers need. Automatic memory management is a non-starter for game programmers who need direct control over their memory layouts. Any interpreted language will be too slow. Functional-only languages are pointlessly restricting. Object-oriented-only languages are overly complex.
+Those are strong languages, but none of them contain the right combination of features (or lack of features) that game programmers need. Automatic memory management is a non-starter for game programmers who need direct control over their memory layouts. Any interpreted language will be too slow. Functional-only languages are pointlessly restricting. Object-Oriented-only languages are overly complex.
 
-The idea behind Jai is to develop a new language with the qualities that game programmers need, and without the qualities they don’t.
+The idea behind Jai is to develop a new language with the qualities that game programmers need, without the features they don’t.
 
-Proposed Features
------------------
+## Proposed Features
 
 These are a few proposed features that have not been implemented yet. To my knowledge they’re not yet in the language. Syntax is preliminary and likely to change.
 
